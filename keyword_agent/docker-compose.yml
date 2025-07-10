@@ -1,0 +1,22 @@
+services:
+  streamlit:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  agent:
+    build: .
+    command: python agent_core/model/main.py
+    volumes:
+      - .:/app
+    env_file:
+      - agent_core/.env
+
+
+# sudo docker-compose up --build
+# sudo docker-compose up --build streamlit
+# sudo docker-compose up --build agent
